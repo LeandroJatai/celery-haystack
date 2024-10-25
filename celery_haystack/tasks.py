@@ -7,7 +7,7 @@ from .conf import settings
 from haystack import connections, connection_router
 from haystack.exceptions import NotHandled as IndexNotFoundException
 
-from celery import Task  # noqa
+from celery import Task, shared_task  # noqa
 from celery.utils.log import get_task_logger
 
 logger = get_task_logger(__name__)
@@ -153,3 +153,14 @@ class CeleryHaystackUpdateIndex(Task):
         logger.info("Starting update index")
         call_command('update_index', *apps, **defaults)
         logger.info("Finishing update index")
+
+
+@shared_task()
+def haystack_signal(action, identifier, **kwargs):
+    task = CeleryHaystackSignalHandler()
+    task.run(action, identifier, **kwargs)
+
+
+@shared_task()
+def haystack_update_index(apps=None, **kwargs):
+    CeleryHaystackUpdateIndex().run(apps, **kwargs)
