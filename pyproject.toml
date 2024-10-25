@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+
+[project]
+name = "celery-haystack"
+version = "1.1.0"  # Replace with your actual version
+description = "An app for integrating Celery with Haystack."
+readme = "README.rst"
+authors = [
+    { name = "Jannis Leidel", email = "jannis@leidel.info" }
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 2.6",
+    "Programming Language :: Python :: 2.7",
+    "Programming Language :: Python :: 3.3",
+    "Programming Language :: Python :: 3.4",
+    "Topic :: Utilities"
+]
+dependencies = [
+    "django-appconf>=0.4.1"
+]
+[project.urls]
+Documentation = "https://github.com/LeandroJatai/celery-haystack#readme"
+Issues = "https://github.com/LeandroJatai/celery-haystack/issues"
+Source = "https://github.com/LeandroJatai/celery-haystack"
+Homepage = "https://github.com/LeandroJatai/celery-haystack"
+
+
+# For backwards_compat section
+[tool.backwards_compat]
+zip_safe = false
+
+# For wheel section
+[tool.wheel]
+include = ["README.rst", "AUTHORS"]
+packages = ["celery_haystack", "celery_haystack.tests"]
+universal = 1
+
+# For global section, note this isn't a direct mapping, but based on the available setup-tools documentation
+[tool.global]
+setup-hooks = ["celery_haystack.version_hook"]
