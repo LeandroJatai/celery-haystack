@@ -164,3 +164,4 @@ def haystack_signal(action, identifier, **kwargs):
 @shared_task()
 def haystack_update_index(apps=None, **kwargs):
     CeleryHaystackUpdateIndex().run(apps, **kwargs)
+    
